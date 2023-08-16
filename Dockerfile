@@ -8,7 +8,7 @@ RUN mkdir /root/ai00_server/dist/assets/models/
 RUN cd /root/ai00_server/dist/assets/models/
 RUN wget https://huggingface.co/cgisky/RWKV-safetensors-fp16/resolve/main/RWKV-4-World-CHNtuned-0.4B-v1-20230618-ctx4096.st
 RUN echo 'cd /root/ai00_server/dist/' >>/start.sh
-RUN echo './ai00_rwkv_server --model assets/models/RWKV-4-World-CHNtuned-0.4B-v1-20230618-ctx4096.st' >>/start.sh
+RUN echo './ai00_server --model assets/models/RWKV-4-World-CHNtuned-0.4B-v1-20230618-ctx4096.st' >>/start.sh
 RUN chmod 755 /start.sh
 EXPOSE 80
 CMD  /start.sh
