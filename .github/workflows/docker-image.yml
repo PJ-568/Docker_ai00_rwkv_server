@@ -15,6 +15,6 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }} 
     - name: Build the Docker image
-      run: docker build --file Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/Docker_ai00_rwkv_server:latest .
+      run: docker build --file Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/debian_ai00_rwkv_server:latest .
     - name: Docker image push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/Docker_ai00_rwkv_server:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/debian_ai00_rwkv_server:latest
