@@ -1,0 +1,31 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.13.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies
+      run: npm i -g yarn && yarn
+    - name: Build
+      run: yarn build
+    - name: Docker login
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }} 
+    - name: Build the Docker image
+      run: docker build --file DockerfilePath -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend-project:latest .
+    - name: Docker image push
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend-project:latest
